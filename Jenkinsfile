@@ -33,7 +33,7 @@ pipeline {
 				rm -rf /var/lib/jenkins/.wso2apictl
 				cd $WORKSPACE/apictl/
 				./apictl version
-                ./apictl add env test --apim https://localhost:9443 
+                ./apictl add env dev --apim https://localhost:9443 
                 """
             }
         }	
