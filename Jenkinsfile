@@ -2,7 +2,7 @@ pipeline {
 
     agent any
     environment { 
-        PATH = "/home/osboxes/WSO2/apictl:$PATH"
+        PATH = "/home/Downloads/apictl:$PATH"
     } 
     options {
         buildDiscarder logRotator( 
@@ -33,7 +33,7 @@ pipeline {
 				rm -rf /var/lib/jenkins/.wso2apictl
 				cd $WORKSPACE/apictl/
 				./apictl version
-                ./apictl add env dev --apim https://localhost:9443 
+                ./apictl add env test --apim https://localhost:9443 
                 """
             }
         }	
@@ -43,10 +43,10 @@ pipeline {
                 sh("bash -c \"chmod +x ${env.WORKSPACE}/apictl/*\"")
 				sh """
 				cd $WORKSPACE/apictl/
-                ./apictl login dev -u admin -p admin
+                ./apictl login test -u admin -p admin
 				./apictl init -f openapi --oas $WORKSPACE/apictl/openapi.yaml
-				./apictl import api -f /var/lib/jenkins/workspace/wso2-dev/apictl/openapi -e dev
-				./apictl change-status api --action 'Publish' -n SwaggerPetstore -v 1.0.5 -e dev
+				./apictl import api -f $WORKSPACE/openapi -e test
+				./apictl change-status api --action 'Publish' -n SwaggerPetstore -v 1.0.5 -e test
                 """
             }
         }
