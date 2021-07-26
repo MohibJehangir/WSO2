@@ -45,8 +45,8 @@ pipeline {
 				cd $WORKSPACE/apictl/
                 ./apictl login dev -u admin -p admin
 				./apictl init -f openapi --oas $WORKSPACE/apictl/openapi.yaml
-				./apictl import api -f $WORKSPACE/openapi -e test
-				./apictl change-status api --action 'Publish' -n SwaggerPetstore -v 1.0.5 -e test
+				./apictl import api -f $WORKSPACE/openapi -e dev
+				./apictl change-status api --action 'Publish' -n SwaggerPetstore -v 1.0.5 -e dev
                 """
             }
         }
